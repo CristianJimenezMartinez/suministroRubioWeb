@@ -1,0 +1,30 @@
+<div class="profile-container">
+  <h2>Editar Perfil</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Nombre</label>
+      <input type="text" formControlName="username"/>
+      <div *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched">
+        El nombre es obligatorio.
+      </div>
+    </div>
+    <div>
+      <label>Apellido</label>
+      <input type="text" formControlName="surname"/>
+      <div *ngIf="profileForm.get('surname')?.invalid && profileForm.get('surname')?.touched">
+        El apellido es obligatorio.
+      </div>
+    </div>
+    <div>
+      <label>Correo electrónico</label>
+      <input type="email" formControlName="email"/>
+      <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+        Ingrese un correo válido.
+      </div>
+    </div>
+    <!-- Agrega los demás campos según sea necesario -->
+    <button type="submit" [disabled]="loading || profileForm.invalid">Guardar Cambios</button>
+  </form>
+
+  <p *ngIf="message">{{ message }}</p>
+</div>

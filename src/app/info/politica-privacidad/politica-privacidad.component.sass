@@ -1,0 +1,75 @@
+@import '../../../_variables'; // Importar tus variables globales si procede
+
+.card-container
+  max-width: 1000px
+  margin: 50px auto 20px auto
+  padding: 30px
+  border: 1px solid #ddd
+  border-radius: 8px
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+  background: #fff
+  font-family: Arial, sans-serif
+  display: flex
+  flex-direction: column
+  align-items: center  // Centrar los elementos dentro de la tarjeta
+  justify-content: flex-start // Alineación superior
+  color: #444
+
+  .company-icon
+    display: block
+    margin: 0 auto 1.5rem  // Centrar la imagen horizontalmente
+    width: 100px
+    height: auto
+
+  h2
+    text-align: center
+    margin-bottom: 30px
+    color: #333
+    font-size: 2rem
+
+  h3
+    color: #333
+    font-size: 1.5rem
+    margin-top: 20px
+
+  p
+    color: #555
+    margin-bottom: 20px
+    line-height: 1.6
+    font-size: 1rem
+
+  a
+    color: $primary-color  // Tomar el color del texto principal
+    text-decoration: none
+    transition: color 0.3s ease, text-decoration 0.3s ease
+
+    &:hover
+      text-decoration: underline  // Subrayar al pasar el ratón
+
+  ul
+    list-style: disc inside
+    padding-left: 20px
+    margin-bottom: 20px
+
+  li
+    margin-bottom: 10px
+    color: #444
+    font-size: 1rem
+
+// Ajustes para móviles
+@media (max-width: 768px)
+  .card-container
+    max-width: 90%      // Reducir el ancho para pantallas pequeñas
+    padding: 20px       // Reducir el padding para un espacio más compacto
+    margin: 10px auto   // Ajuste del margen superior e inferior
+
+    h2
+      font-size: 1.5rem   // Fuente ligeramente menor
+
+    h3
+      font-size: 1.2rem
+
+    p,
+    ul,
+    li
+      font-size: 0.95rem   // Reducir ligeramente tamaños de fuente

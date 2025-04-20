@@ -1,0 +1,192 @@
+<div class="register-container">
+  <h2>Registro</h2>
+  
+  <!-- Spinner de carga -->
+  <app-loading *ngIf="loading"></app-loading>
+  
+  <!-- Componente Popup personalizado para mostrar mensajes -->
+  <app-popup *ngIf="showPopup" [message]="popupMessage" (accepted)="onPopupAccept()"></app-popup>
+
+  <form #registerForm="ngForm" (ngSubmit)="register()" novalidate>
+    <!-- Nombre de usuario (obligatorio) -->
+    <div>
+      <label for="username">Nombre de usuario <span class="required">*</span></label>
+      <input
+        id="username"
+        [(ngModel)]="user.username"
+        name="username"
+        type="text"
+        required
+        maxlength="35"
+        #username="ngModel" />
+      <div class="error" *ngIf="username.invalid && (username.dirty || username.touched)">
+        El nombre de usuario es obligatorio.
+      </div>
+    </div>
+    
+    <!-- Apellido (obligatorio) -->
+    <div>
+      <label for="surname">Apellido <span class="required">*</span></label>
+      <input
+        id="surname"
+        [(ngModel)]="user.surname"
+        name="surname"
+        type="text"
+        required
+        maxlength="65"
+        #surname="ngModel" />
+      <div class="error" *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+        El apellido es obligatorio.
+      </div>
+    </div>
+    
+    <!-- Correo electrónico (obligatorio) -->
+    <div>
+      <label for="email">Correo electrónico <span class="required">*</span></label>
+      <input
+        id="email"
+        [(ngModel)]="user.email"
+        name="email"
+        type="email"
+        required
+        maxlength="255"
+        #email="ngModel" />
+      <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)">
+        Introduce un correo válido.
+      </div>
+    </div>
+    
+    <!-- Contraseña (obligatorio) -->
+    <div>
+      <label for="password">Contraseña <span class="required">*</span></label>
+      <input
+        id="password"
+        [(ngModel)]="user.password"
+        name="password"
+        type="password"
+        required
+        minlength="6"
+        maxlength="100"
+        #password="ngModel" />
+      <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
+        La contraseña es obligatoria y debe tener al menos 6 caracteres.
+      </div>
+    </div>
+    
+    <!-- Dirección (obligatorio) -->
+    <div>
+      <label for="address">Dirección <span class="required">*</span></label>
+      <input
+        id="address"
+        [(ngModel)]="user.address"
+        name="address"
+        type="text"
+        required
+        maxlength="100"
+        #address="ngModel" />
+      <div class="error" *ngIf="address.invalid && (address.dirty || address.touched)">
+        La dirección es obligatoria.
+      </div>
+    </div>
+    
+    <!-- DNI (opcional) -->
+    <div>
+      <label for="dni">DNI</label>
+      <input id="dni" [(ngModel)]="user.dni" name="dni" type="text" maxlength="18" #dni="ngModel" />
+    </div>
+    
+    <!-- Teléfono (obligatorio) -->
+    <div>
+      <label for="telf">Teléfono <span class="required">*</span></label>
+      <input
+        id="telf"
+        [(ngModel)]="user.telf"
+        name="telf"
+        type="text"
+        required
+        pattern="^[0-9]{9}$"
+        maxlength="20"
+        #telf="ngModel" />
+      <div class="error" *ngIf="telf.invalid && (telf.dirty || telf.touched)">
+        Introduce un teléfono válido (9 dígitos).
+      </div>
+    </div>
+    
+    <!-- Código Postal (obligatorio) -->
+    <div>
+      <label for="cp">Código Postal <span class="required">*</span></label>
+      <input
+        id="cp"
+        [(ngModel)]="user.cp"
+        name="cp"
+        type="text"
+        required
+        pattern="^[0-9]{5}$"
+        maxlength="10"
+        #cp="ngModel" />
+      <div class="error" *ngIf="cp.invalid && (cp.dirty || cp.touched)">
+        Introduce un código postal válido (5 dígitos).
+      </div>
+    </div>
+    
+    <!-- Población (obligatorio) -->
+    <div>
+      <label for="pob">Población <span class="required">*</span></label>
+      <input
+        id="pob"
+        [(ngModel)]="user.pob"
+        name="pob"
+        type="text"
+        required
+        maxlength="30"
+        #pob="ngModel" />
+      <div class="error" *ngIf="pob.invalid && (pob.dirty || pob.touched)">
+        La población es obligatoria.
+      </div>
+    </div>
+    
+    <!-- Provincia (obligatorio) -->
+    <div>
+      <label for="prov">Provincia <span class="required">*</span></label>
+      <input
+        id="prov"
+        [(ngModel)]="user.prov"
+        name="prov"
+        type="text"
+        required
+        maxlength="40"
+        #prov="ngModel" />
+      <div class="error" *ngIf="prov.invalid && (prov.dirty || prov.touched)">
+        La provincia es obligatoria.
+      </div>
+    </div>
+    
+    <!-- País (obligatorio) -->
+    <div>
+      <label for="pais">País <span class="required">*</span></label>
+      <input
+        id="pais"
+        [(ngModel)]="user.pais"
+        name="pais"
+        type="text"
+        required
+        maxlength="50"
+        #pais="ngModel" />
+      <div class="error" *ngIf="pais.invalid && (pais.dirty || pais.touched)">
+        El país es obligatorio.
+      </div>
+    </div>
+    
+    <!-- Tipo de Documento de Crédito (opcional) -->
+    <div>
+      <label for="tdc">Tipo de Documento de Crédito</label>
+      <input id="tdc" [(ngModel)]="user.tdc" name="tdc" type="text" maxlength="3" #tdc="ngModel" />
+    </div>
+    
+    <button type="submit" [disabled]="registerForm.invalid || loading">
+      Registrar
+    </button>
+  </form>
+  
+  <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+</div>

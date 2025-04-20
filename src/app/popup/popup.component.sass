@@ -1,0 +1,43 @@
+@import '../../_variables' // Importa tus variables globales
+
+// Overlay para oscurecer el fondo (similar a un modal)
+.popup-overlay
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: rgba(0, 0, 0, 0.5)  // Semitransparente para difuminar el fondo
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 1000
+
+// Card del popup, con estilo similar al register-container
+.popup-card
+  background-color: #f9f9f9
+  padding: 20px
+  border: 1px solid $border-color
+  border-radius: 8px
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+  max-width: 400px
+  width: 90%
+  text-align: center
+
+  p
+    font-size: 1.2rem
+    margin-bottom: 1.5rem
+
+  button
+    padding: 12px
+    font-size: 1rem
+    background-color: $primary-color
+    color: white
+    border: none
+    border-radius: 6px
+    cursor: pointer
+    width: 100%
+    transition: background-color 0.3s ease
+
+    &:hover
+      background-color: $primary-hover-color

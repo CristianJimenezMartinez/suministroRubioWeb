@@ -1,0 +1,229 @@
+@import '../../_variables' // Importamos las variables globales
+
+header
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 80px
+  z-index: 1000
+  background-color: $dropdown-bg
+  padding: 0.5rem 1rem
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+
+  .container-fluid
+    display: flex
+    align-items: center
+    position: relative
+    gap: 1rem
+
+// Barra de búsqueda
+.search-bar
+  display: flex
+  align-items: center
+  flex: 1
+  justify-content: center
+
+  input
+    width: clamp(150px, 50%, 600px)
+    padding: clamp(6px, 2vw, 10px) clamp(10px, 3vw, 15px)
+    font-size: clamp(0.85rem, 2vw, 1rem)
+    border: 1px solid $border-color
+    border-radius: 25px
+    outline: none
+    transition: all 0.3s ease
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+
+    &:focus
+      border-color: $primary-color
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+
+// Sección derecha: carrito y usuario
+.right-section
+  display: flex
+  align-items: center
+  gap: 1.5rem
+  margin-left: 1rem
+  flex-wrap: nowrap
+
+  .cart-container
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 8px
+
+  .cart-button
+    background-color: $yellow-color
+    color: white
+    border: none
+    padding: 0.5rem 1rem
+    border-radius: 4px
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 0.5rem
+    min-width: 50px
+    min-height: 40px
+
+    svg
+      width: 24px
+      height: 24px
+
+  .user-section
+    display: flex
+    align-items: center
+    gap: 10px
+
+    // Vista Desktop (botones login/registro)
+    .desktop-user
+      display: flex
+      gap: 0.5rem
+
+      a
+        background-color: $yellow-color
+        color: black
+        font-size: 1rem
+        text-decoration: none
+        padding: 8px 16px
+        border-radius: 4px
+        border: 1px solid $yellow-color
+        cursor: pointer
+        transition: background-color 0.3s, color 0.3s
+
+        &:hover
+          background-color: $primary-hover-color-button
+          color: white
+
+    // Botón de usuario para cuando está logueado
+    .user-button
+      background-color: $yellow-color
+      border: none
+      padding: 0.5rem 1rem
+      border-radius: 4px
+      cursor: pointer
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 0.5rem
+      min-width: 50px
+      min-height: 40px
+
+      svg
+        width: 24px
+        height: 24px
+        fill: white
+        stroke: white
+
+      &:hover
+        background-color: $primary-hover-color-button
+
+    // Dropdown de perfil integrado (la parte "profile")
+    .profile-dropdown
+      list-style: none
+      margin: 0
+      padding: 0.5rem 0
+      background-color: white
+      border: 1px solid $border-color
+      border-radius: 4px
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+      width: 150px
+
+      li
+        a.dropdown-item
+          display: block
+          padding: 0.5rem 1rem
+          color: black
+          text-decoration: none
+          transition: background-color 0.3s, color 0.3s
+          // Aseguramos que también cambie el cursor para estos enlaces
+          cursor: pointer
+
+          &:hover
+            background-color: $primary-hover-color-button
+            color: white
+
+    // Vista Móvil: mostramos la imagen con fondo del mismo color que el header
+    .mobile-user
+      display: none
+      a
+        display: inline-block
+        img
+          width: 32px
+          height: 32px
+          border-radius: 50%
+          background-color: $dropdown-bg // mismo color de fondo que el header
+
+// Ajuste del margen superior para el contenido
+main, .content
+  margin-top: 80px
+
+//
+// MEDIA QUERIES
+//
+
+// Dispositivos medianos (tablets)
+@media (max-width: 992px)
+  .search-bar input
+    max-width: 300px
+    font-size: 0.9rem
+    padding: 8px 12px
+
+  .cart-button
+    padding: 0.4rem 0.8rem
+
+    svg
+      // Ajustes opcionales para tamaños de ícono en tablets
+
+  .user-section .desktop-user
+    gap: 0.4rem
+
+    a
+      font-size: 0.9rem
+      padding: 6px 12px
+
+// Dispositivos pequeños (móviles)
+@media (max-width: 620px)
+  header
+    padding: 0.3rem 0.5rem
+
+    .container-fluid
+      flex-wrap: nowrap
+      gap: 0.5rem
+
+  .search-bar
+    margin: 0
+    input
+      width: clamp(80px, 40vw, 180px)
+      font-size: 0.85rem
+      padding: 6px 10px
+
+  .right-section
+    gap: 0.3rem
+    margin-top: 0
+    justify-content: flex-end
+    width: auto
+
+    .cart-button
+      padding: 0.3rem 0.6rem
+
+      svg
+        // Ajustes opcionales para íconos en móviles
+
+    .user-section
+      .mobile-user
+        display: inline-block
+        a
+          img
+            width: 32px
+            height: 32px
+            border-radius: 50%
+            background-color: $dropdown-bg
+
+  main, .content
+    margin-top: 70px
+
+// Regla para que TODOS los enlaces dentro del header muestren el cursor de puntero
+header a 
+  cursor: pointer;
+

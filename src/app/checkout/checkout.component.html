@@ -1,0 +1,58 @@
+<div class="checkout-container">
+  <h2>Finalizar Compra</h2>
+  <form (ngSubmit)="submitCheckout()" #checkoutForm="ngForm">
+    <!-- Datos de Envío -->
+    <div class="form-group">
+      <label>Nombre completo:</label>
+      <input type="text" name="fullName" [(ngModel)]="shippingData.fullName" required>
+    </div>
+    <div class="form-group">
+      <label>Dirección:</label>
+      <input type="text" name="address" [(ngModel)]="shippingData.address" required>
+    </div>
+    <div class="form-group">
+      <label>Ciudad:</label>
+      <input type="text" name="city" [(ngModel)]="shippingData.city" required>
+    </div>
+    <div class="form-group">
+      <label>Código postal:</label>
+      <input type="text" name="postalCode" [(ngModel)]="shippingData.postalCode" required>
+    </div>
+    <div class="form-group">
+      <label>País:</label>
+      <input type="text" name="country" [(ngModel)]="shippingData.country" required>
+    </div>
+    <div class="form-group">
+      <label>Teléfono:</label>
+      <input type="tel" name="phone" [(ngModel)]="shippingData.phone" required>
+    </div>
+
+    <!-- Selección del Método de Envío -->
+    <div class="form-group">
+      <label>Método de Envío:</label>
+      <select name="shippingMethod" [(ngModel)]="shippingMethod" (change)="onShippingMethodChange()">
+        <option value="standard">Estándar (4-6 días) - 5€</option>
+        <option value="express">Exprés (1-2 días) - 10€</option>
+      </select>
+    </div>
+
+    <!-- Resumen del Pedido -->
+    <div class="order-summary">
+      <h3>Resumen del Pedido</h3>
+      <ul>
+        <li *ngFor="let item of cartItems">
+          {{ item.name }} – Cantidad: {{ item.quantity }} – Subtotal: 
+          {{ (item.price * item.quantity) | currency:'EUR':'symbol':'1.2-2' }}
+        </li>
+      </ul>
+      <p>Subtotal: {{ subtotal | currency:'EUR':'symbol':'1.2-2' }}</p>
+      <p>Envío: {{ shippingCost | currency:'EUR':'symbol':'1.2-2' }}</p>
+      <p>Total: {{ total | currency:'EUR':'symbol':'1.2-2' }}</p>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="cancel(); $event.stopPropagation()">Volver al Carrito</button>
+      <button type="submit" [disabled]="checkoutForm.invalid">Realizar Compra</button>
+    </div>
+  </form>
+</div>

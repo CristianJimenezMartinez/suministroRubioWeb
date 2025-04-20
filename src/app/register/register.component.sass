@@ -1,0 +1,91 @@
+@import '../../_variables' // Importar variables globales
+
+// Estilos del contenedor de registro
+.register-container
+  max-width: 900px
+  margin: 65px auto 0 auto  // Se añade un margen superior para evitar que el header lo cubra
+  padding: 10px
+  border: 1px solid $border-color
+  border-radius: 8px
+  background-color: #f9f9f9
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+
+h2
+  text-align: center
+  font-size: 1.8rem
+  margin-bottom: 2rem
+
+form
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  gap: 0.5rem
+  grid-template-rows: auto
+
+  @media (max-width: 768px)
+    grid-template-columns: 1fr  // Se ajusta a una columna en pantallas pequeñas
+
+/* Asignación de columnas para cada input en escritorio */
+#username, #email, #dni, #cp, #prov, #tdc
+  grid-column: 1 / 2
+
+#surname, #address, #telf, #pob, #pais, #password
+  grid-column: 2 / 3
+
+/* Botón de registro (ocupa ambas columnas en escritorio) */
+button
+  grid-column: 1 / 3
+  padding: 12px
+  font-size: 1rem
+  background-color: $primary-color
+  color: white
+  border: none
+  border-radius: 6px
+  cursor: pointer
+  width: 100%
+
+  &:hover
+    background-color: $primary-hover-color
+
+/* Estilo para el texto y enlace */
+p
+  text-align: center
+  margin-top: 1.5rem
+
+a
+  color: $primary-color
+  text-decoration: none
+  font-size: 1rem
+  display: inline-block
+  margin-top: 10px
+  transition: color 0.3s ease
+
+  &:hover
+    color: $primary-hover-color
+    text-decoration: underline
+
+/* Ajustes para los campos de formulario */
+.register-container > div
+  display: flex
+  flex-direction: column
+  gap: 0.8rem
+  padding: 0 10px
+
+/* Estilos para inputs */
+input
+  padding: 12px
+  font-size: 1rem
+  border: 1px solid #ccc
+  border-radius: 6px
+  width: 100%
+
+  &:focus
+    outline: none
+    border-color: $primary-color
+
+// En móviles, forzamos que todos los inputs y el botón ocupen toda la fila
+@media (max-width: 768px)
+  form
+    #username, #email, #dni, #cp, #prov, #tdc,
+    #surname, #address, #telf, #pob, #pais, #password,
+    button
+      grid-column: 1 / -1

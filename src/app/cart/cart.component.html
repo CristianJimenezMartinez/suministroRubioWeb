@@ -1,0 +1,52 @@
+<div class="cart-container" *ngIf="currentStep !== 'none'">
+  <div class="cart-popup">
+    <button class="close-button" (click)="closeCart()">X</button>
+
+    <!-- Vista del Carrito -->
+    <div *ngIf="currentStep === 'cart'" class="cart">
+      <h2>Tus Productos</h2>
+      <div *ngIf="items.length === 0">
+        <p>Tu carrito está vacío.</p>
+      </div>
+      <div *ngIf="items.length > 0">
+        <section class="categories">
+          <div class="category-card" *ngFor="let item of items">
+            <img *ngIf="item.img" [src]="item.img" alt="Imagen de {{ item.name }}">
+            <h3>{{ item.name }}</h3>
+            <p>Precio: {{ item.price + "€" }}</p>
+            <div class="quantity-control">
+              <label>Cantidad:</label>
+              <input #qtyInput type="number" min="1" [value]="item.quantity" (change)="updateQuantity(item, qtyInput.valueAsNumber)">
+            </div>
+            <p>Subtotal: {{ item.price * item.quantity + "€" }}</p>
+            <button (click)="removeItem(item)">Eliminar</button>
+          </div>
+        </section>
+        <div class="total">
+          <p>Total: {{ total + "€" }}</p>
+        </div>
+        <div class="continue">
+          <button (click)="continueCheckout(); $event.stopPropagation()">Continuar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vista del Checkout -->
+    <div *ngIf="currentStep === 'checkout'" class="checkout">
+      <app-checkout [cartItems]="items"
+                    (checkoutCompleted)="handleCheckoutCompleted($event)"
+                    (cancelCheckout)="onStepChange('cart')">
+      </app-checkout>
+    </div>
+
+    <!-- Vista de Pago -->
+    <div *ngIf="currentStep === 'payment'" class="payment">
+      <app-payment [cartItems]="cartItemsForPayment"
+                   (paymentConfirmed)="handlePaymentConfirmed($event)"
+                   (paymentError)="handlePaymentError($event)"
+                   (cancel)="onStepChange('checkout')">
+      </app-payment>
+    </div>
+  </div>
+  <app-popup *ngIf="showPopup" [message]="popupMessage" (accepted)="closePopup()"></app-popup>
+</div>

@@ -1,0 +1,14 @@
+<div class="payment">
+    <h2>Pago</h2>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <form (submit)="pay(); $event.preventDefault()">
+      <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+      <div class="actions">
+        <button type="submit" [disabled]="processing">
+          {{ processing ? 'Procesando...' : 'Confirmar Pago' }}
+        </button>
+        <button type="button" (click)="onCancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

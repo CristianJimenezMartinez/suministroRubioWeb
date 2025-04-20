@@ -1,0 +1,88 @@
+@import '../../_variables' // Si tienes variables globales
+
+.footer
+  background-color: #f8f8f8
+  padding: 1rem 0
+  border-top: 1px solid #e7e7e7
+  font-size: 0.9rem
+  color: #555
+
+  .footer-container
+    max-width: 1200px
+    margin: 0 auto
+    padding: 0 1rem
+
+    // Sección superior (info + redes) en una fila (si la usas)
+    .footer-top
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      align-items: center
+      width: 100%
+
+      @media (max-width: 576px)
+        flex-direction: column
+        gap: 0.5rem
+        text-align: center
+
+  .footer-info
+    margin-top: 2rem
+    p
+      margin: 0.2rem 0
+
+    a
+      color: inherit
+      text-decoration: none
+      transition: color 0.3s
+
+      &:hover
+        color: $primary-color
+
+  .footer-social
+    a
+      color: inherit
+      margin-left: 0.5rem
+      font-size: 1.2rem
+      transition: color 0.3s
+
+      &:first-child
+        margin-left: 0
+
+      &:hover
+        color: $primary-color
+
+  // Sección de crédito abajo, siempre centrada
+  .footer-credit
+    margin-top: 1rem
+    margin-right: 1rem
+    text-align: center
+    p
+      font-size: 0.8rem
+      color: #888
+      margin: 0
+
+      a
+        color: inherit
+        text-decoration: none
+        transition: color 0.3s
+
+        &:hover
+          color: $primary-color
+
+// Ajustes responsivos para móviles
+@media (max-width: 576px)
+  .footer
+    // Disminuye el font-size general del footer
+    font-size: 0.8rem
+
+    // Ajusta márgenes si es necesario
+    padding: 0.5rem 0
+
+    .footer-info
+      margin-top: 1.5rem
+      p
+        margin: 0.1rem 0   // reduce aún más los márgenes
+
+    .footer-credit
+      p
+        font-size: 0.6rem  // reduce el tamaño de “Made By CJ”

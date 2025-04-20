@@ -1,0 +1,55 @@
+<div class="categorias-container">
+  <div class="main-layout">
+    <!-- Panel lateral de filtro, fijo a la izquierda -->
+    <div class="filter-panel">
+      <h3 class="toggle-filter" (click)="toggleFilter()">
+        Filtros
+        <span *ngIf="isFilterOpen">&#9650;</span>
+        <span *ngIf="!isFilterOpen">&#9660;</span>
+      </h3>
+      <div class="filter-group" *ngIf="isFilterOpen">
+        <fieldset>
+          <legend>Filtrar por letra:</legend>
+          <ul>
+            <li *ngFor="let type of availableTypes">
+              <label>
+                <input
+                  type="checkbox"
+                  [value]="type"
+                  (change)="onCheckboxChange($event)"
+                  id="{{ type }}"
+                />
+                <span>{{ type }}</span>
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+    
+    <!-- Contenido principal a la derecha -->
+    <div class="content">
+      <!-- Tarjeta del título -->
+      <div class="title-card">
+        <h1>Explora nuestras categorias</h1>
+      </div>
+      
+      <app-loading *ngIf="isLoading"></app-loading>
+
+      <section class="categories" *ngIf="!isLoading && filteredFamilies && filteredFamilies.length > 0">
+        <div class="category-card" *ngFor="let fam of filteredFamilies | slice:0:displayedCount">
+          <h3>{{ fam.desfam }}</h3>
+          <button (click)="goToArticles(fam.codfam)">Ver Artículos</button>
+        </div>
+      </section>
+
+      <div *ngIf="!isLoading && (!filteredFamilies || filteredFamilies.length === 0)">
+        <p>No se encontraron familias.</p>
+      </div>
+
+      <div class="load-more" *ngIf="!isLoading && filteredFamilies && filteredFamilies.length > displayedCount">
+        <button (click)="loadMore()">Ver más</button>
+      </div>
+    </div>
+  </div>
+</div>
